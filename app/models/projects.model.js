@@ -17,7 +17,7 @@ Project.insertProject = (project,resultCallback) => {
   var sql = "INSERT INTO `" + TableName + "` (`id`, `projectname`, `projectdesc`, `startdate`, `enddate`)";
   sql += " VALUES ('"+project.id+"',"+project.projectName+"',"+project.projectDesc+"',"+project.startDate+"',"+project.endDate+")";
 
-  connection.query(sql, function (err, result) {
+  db.query(sql, function (err, result) {
     if (err) {
       console.log(err);
       resultCallback(err,null);
@@ -31,9 +31,8 @@ Project.insertProject = (project,resultCallback) => {
 
 //Retrieve Project
 Project.getProjectAll = (resultCallback) => {
-    
   var sql = "SELECT * FROM `" + TableName + "`";
-  connection.query(sql, function (err, result) {
+  db.query(sql, function (err, result) {
     let project_List = []
     if (err) {
       resultCallback(err,null);
@@ -41,13 +40,14 @@ Project.getProjectAll = (resultCallback) => {
     else {
       for (const project_entry_rdp of result) {
         const project_entry = {
-          id: project_entry_rdp.id,
-          projectName: project_entry_rdp.projectName,
-          projectDesc: project_entry_rdp.projectDesc,
-          startDate: project_entry_rdp.startDate,
-          endDate: project_entry_rdp.endDate
+          "id": project_entry_rdp.id,
+          "projectName": project_entry_rdp.projectname,
+          "projectDesc": project_entry_rdp.projectdesc,
+          "startDate": project_entry_rdp.startdate,
+          "endDate": project_entry_rdp.enddate
         };
-        project_List.push(movie_entry);
+        // console.log(project_entry);
+        project_List.push(project_entry);
       }
       resultCallback(null,project_List);
     }
@@ -57,8 +57,8 @@ Project.getProjectAll = (resultCallback) => {
 //Retrieve Project By ID
 Project.getProjectID = (pID,resultCallback) => {
     
-  var sql = "SELECT * FROM `" + TableName + "` WHERE ID=`" + pID + "`";
-  connection.query(sql, function (err, result) {
+  var sql = "SELECT * FROM `" + TableName + "` WHERE ID=" + pID;
+  db.query(sql, function (err, result) {
     let project_List = []
     if (err) {
       resultCallback(err,null);
@@ -67,12 +67,12 @@ Project.getProjectID = (pID,resultCallback) => {
       for (const project_entry_rdp of result) {
         const project_entry = {
           id: project_entry_rdp.id,
-          projectName: project_entry_rdp.projectName,
-          projectDesc: project_entry_rdp.projectDesc,
-          startDate: project_entry_rdp.startDate,
-          endDate: project_entry_rdp.endDate
+          projectName: project_entry_rdp.projectname,
+          projectDesc: project_entry_rdp.projectdesc,
+          startDate: project_entry_rdp.startdate,
+          endDate: project_entry_rdp.enddate
         };
-        project_List.push(movie_entry);
+        project_List.push(project_entry);
       }
       resultCallback(null,project_List);
     }
@@ -83,7 +83,7 @@ Project.getProjectID = (pID,resultCallback) => {
 Project.getProjectName = (pName,resultCallback) => {
     
   var sql = "SELECT * FROM `" + TableName + "` WHERE ID=`" + pName + "`";
-  connection.query(sql, function (err, result) {
+  db.query(sql, function (err, result) {
     let project_List = []
     if (err) {
       resultCallback(err,null);
@@ -92,12 +92,12 @@ Project.getProjectName = (pName,resultCallback) => {
       for (const project_entry_rdp of result) {
         const project_entry = {
           id: project_entry_rdp.id,
-          projectName: project_entry_rdp.projectName,
-          projectDesc: project_entry_rdp.projectDesc,
-          startDate: project_entry_rdp.startDate,
-          endDate: project_entry_rdp.endDate
+          projectName: project_entry_rdp.projectname,
+          projectDesc: project_entry_rdp.projectdesc,
+          startDate: project_entry_rdp.startdate,
+          endDate: project_entry_rdp.enddate
         };
-        project_List.push(movie_entry);
+        project_List.push(project_entry);
       }
       resultCallback(null,project_List);
     }
@@ -105,13 +105,25 @@ Project.getProjectName = (pName,resultCallback) => {
 }
 
 //Update Project By ID
-
-
+Project.updateProjectID = (pID,resultCallback) => {
+    
+  var sql = "ALTER FROM `" + TableName + "` WHERE `" + TableName + "`.`id`=" + pID;
+  console.log(sql);
+  db.query(sql, function (err, result) {
+    if (err) {
+      resultCallback(err);
+    }
+    else {
+      resultCallback(null);
+    }
+  });
+}
 //Delete Projects By ID
 Project.removeProjectID = (pID,resultCallback) => {
     
-  var sql = "DELETE * FROM `" + TableName + "` WHERE ID=`" + pName + "`";
-  connection.query(sql, function (err, result) {
+  var sql = "DELETE FROM `" + TableName + "` WHERE `" + TableName + "`.`id`=" + pID;
+  console.log(sql);
+  db.query(sql, function (err, result) {
     if (err) {
       resultCallback(err);
     }
@@ -125,7 +137,7 @@ Project.removeProjectID = (pID,resultCallback) => {
 Project.removeProjectAll = (resultCallback) => {
     
   var sql = "TRUNCATE TABLE `" + TableName + "`";
-  connection.query(sql, function (err, result) {
+  db.query(sql, function (err, result) {
     if (err) {
       resultCallback(err);
     }

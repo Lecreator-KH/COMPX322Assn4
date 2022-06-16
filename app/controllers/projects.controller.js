@@ -2,7 +2,7 @@ const Project = require("../models/projects.model");
  
 // TODO: complete the code as per the instructions given in Assignment 4
 exports.createProject = (req,res) => {
-    //console.log(req.body);
+    console.log(req.body);
 	let id = req.body.id; 
     let projectName = req.body.projectName;
     let projectDesc = req.body.projectDesc;
@@ -40,7 +40,7 @@ exports.retrieveAllProject = (req,res) => {
 
 exports.retrieveProjectID = (req,res) => {
 
-    Project.getProjectID( pID, (err,data) => {
+    Project.getProjectID( req.params.id, (err,data) => {
 		if (err) {
 			res.status(500).send({
 				message: "Some error occurred while retrieving project"
@@ -54,7 +54,7 @@ exports.retrieveProjectID = (req,res) => {
 
 exports.retrieveProjectName = (req,res) => {
 
-    Project.getProjectName( pName, (err,data) => {
+    Project.getProjectName( req.params.projectName, (err,data) => {
 		if (err) {
 			res.status(500).send({
 				message: "Some error occurred while retrieving project"
@@ -68,7 +68,7 @@ exports.retrieveProjectName = (req,res) => {
 
 exports.deleteProjectID = (req,res) => {
 
-    Project.removeProjectID( pID, (err) => {
+    Project.removeProjectID( req.params.id, (err) => {
 		if (err) {
 			res.status(500).send({
 				message: "Some error occurred while retrieving project"
