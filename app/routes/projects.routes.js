@@ -16,7 +16,7 @@ module.exports = app => {
 	// Provide all routes here
 	//Create Project
 	router.post("/create/",function(req,res) {
-		projects.createProject(req,res);
+		projectsController.createProject(req,res);
 	});
 	//Retrive All Project
 	router.get("/projects/",function(req,res) {
@@ -24,19 +24,19 @@ module.exports = app => {
 	});
 	//Retrieve Project by ID
 	router.get("/projects/:id",function(req,res) {
-		projects.retrieveProjectID(req,res);
+		projectsController.retrieveProjectID(req,res);
 	});
 	//Retrieve Project by Name
 	router.get("/projects/:projectName",function(req,res) {
-		projects.retrieveProjectName(req,res);
+		projectsController.retrieveProjectName(req,res);
 	});
 	//Update Project By ID
 	router.get("/projects/:id",function(req,res) {
-		projects.updateProjectID(req,res);
+		projectsController.updateProjectID(req,res);
 	});
 	//Delete Project By ID
 	router.get("/delete/:id",function(req,res) {
-		projects.deleteProjectID(req,res);
+		projectsController.deleteProjectID(req,res);
 	});
 	//Delete All Project
 	router.get("/delete/",function(req,res) {
