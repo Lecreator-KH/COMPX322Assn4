@@ -41,7 +41,7 @@ Project.getProjectAll = (resultCallback) => {
 
 //Retrieve Project By ID
 Project.getProjectID = (pID,resultCallback) => {
-  var sql = "SELECT * FROM projects WHERE ID=`" + pID + "`";
+  var sql = "SELECT * FROM projects WHERE ID=" + pID;
   db.query(sql, function(err, res) {
     if (err) {
       console.log('Error: ', err);
@@ -86,7 +86,7 @@ Project.updateProjectID = (pid, project, resultCallback) => {
 //Delete Projects By ID
 Project.removeProjectID = (pID,resultCallback) => {
     
-  var sql = "DELETE * FROM `" + TableName + "` WHERE ID=`" + pID + "`";
+  var sql = "DELETE * FROM `" + TableName + "` WHERE ID=" + pID;
   db.query(sql, function(err, res) {
     if (err) {
       console.log('Error: ', err);
