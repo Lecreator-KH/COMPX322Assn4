@@ -72,7 +72,7 @@ Project.getProjectName = (pName,resultCallback) => {
 
 //Update Project By ID
 Project.updateProjectID = (pid, project, resultCallback) => {
-  db.query("UPDATE projects SET projectname=?, projectdesc=?, startdate=?, enddate=? WHERE ID=?", [project.projectname, project.projectdesc, project.startdate, project.enddate, pid], function(err, res) {
+  db.query("UPDATE projects SET projectname=?, projectdesc=?, startdate=?, enddate=? WHERE ID=?", [project.projectName, project.projectDesc, project.startDate, project.endDate, pid], function(err, res) {
     if (err) {
       console.log('Error: ', err);
       resultCallback(err, null);   
