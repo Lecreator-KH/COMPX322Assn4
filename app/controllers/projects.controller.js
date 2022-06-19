@@ -10,7 +10,7 @@ exports.createProject = (req, res) => {
 		}
 	);
 	else 
-	  	Projects.insertProject(new Project(req.body), (err, project) => {
+	  	Project.insertProject(new Project(req.body), (err, project) => {
 			// something went wrong with the server or database
 			if (err)
 				res.status(500).send(err);
