@@ -1,8 +1,9 @@
+// Kevin Han 1521885
 const Project = require("../models/projects.model");
  
 // TODO: complete the code as per the instructions given in Assignment 4
 exports.createProject = (req, res) => {
-	// check if the request body is not empty
+	// Check if the request body is not empty
 	if (req.body.constructor === Object && Object.keys(req.body).length === 0) 
 	  	res.status(400).json({
 			message: "Content can not be empty!"
@@ -10,7 +11,7 @@ exports.createProject = (req, res) => {
 	);
 	else 
 	  	Project.insertProject(new Project(req.body), (err, project) => {
-			// something went wrong with the server or database
+			// Something went wrong with the server or database
 			if (err)
 				res.status(500).send(err);
 			else 
@@ -20,6 +21,7 @@ exports.createProject = (req, res) => {
 
 exports.retrieveAllProject = (req,res) => {
     Project.getProjectAll( (err,data) => {
+		// Something went wrong with the server or database
 		if (err)
 			res.status(500).send(err);
 		else
@@ -29,6 +31,7 @@ exports.retrieveAllProject = (req,res) => {
 
 exports.retrieveProjectID = (req,res) => {
     Project.getProjectID( req.params.id, (err,data) => {
+		// Something went wrong with the server or database
 		if (err)
 			res.status(500).send(err);
 		else
@@ -44,6 +47,7 @@ exports.retrieveProjectID = (req,res) => {
 
 exports.retrieveProjectName = (req,res) => {
     Project.getProjectName( req.params.projectName, (err,data) => {
+		// Something went wrong with the server or database
 		if (err) 
 			res.status(500).send(err);
 		else
@@ -75,7 +79,6 @@ exports.updateProjectID = (req, res) => {
 					res.status(404).json({
 						message: "Failed to update project at id: " + req.params.id,  
 					});
-				// success, project was updated with the request body
 				else
 					res.json({
 						message: "Successfully updated project at id: " + req.params.id,
@@ -88,12 +91,11 @@ exports.deleteProjectID = (req,res) => {
 		if (err)
 			res.status(500).send(err);
 		else
-			// no projects with the ID were affected
+			// No projects with the ID were affected
 			if (affectedRows === 0)
 				res.status(404).json({
 					message: "Failed to delete project at id: " + req.params.id,
 				});
-			// 
 			else
 				res.json({
 					message: 'Successfully deleted project at id : ' + req.params.id,
@@ -103,6 +105,7 @@ exports.deleteProjectID = (req,res) => {
 
 exports.deleteProjectAll = (req,res) => {
     Project.removeProjectAll( (err) => {
+		// Something went wrong with the server or database
 		if (err)
 			res.status(500).send(err);
 		else

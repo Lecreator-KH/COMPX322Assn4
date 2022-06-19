@@ -1,7 +1,10 @@
+// Kevin Han 1521885
+
 const db = require("./db");
 
 // TODO: complete the code as per the instructions given in Assignment 4
 
+//Constructor for project
 const Project = function(project) {
   this.projectName = project.projectName;
   this.projectDesc = project.projectDesc;
