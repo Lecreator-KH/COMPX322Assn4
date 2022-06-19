@@ -28,36 +28,22 @@ module.exports = app => {
 	* 
 	* 404 status request body (JSON): {}
 	*/
-	router.post("/create/",function(req,res) {
-		projectsController.createProject(req,res);
-	});
+	router.post("/create/", projectsController.createProject());
 	//Retrive All Project
 	/**
    	* GET/api/projects
    	*/
-	router.get("/projects/",function(req,res) {
-		projectsController.retrieveAllProject(req,res);
-	});
+	router.get("/projects/", projectsController.retrieveAllProject());
 	//Retrieve Project by Name
-	router.get("/projects/project",function(req,res) {
-		projectsController.retrieveProjectName(req,res);
-	});
+	router.get("/projects/project", projectsController.retrieveProjectName());
 	//Retrieve Project by ID
-	router.get("/projects/:id",function(req,res) {
-		projectsController.retrieveProjectID(req,res);
-	});
+	router.get("/projects/:id", projectsController.retrieveProjectID());
 	//Update Project By ID
-	router.get("/update/:id",function(req,res) {
-		projectsController.updateProjectID(req,res);
-	});
+	router.put("/update/:id", projectsController.updateProjectID());
 	//Delete Project By ID
-	router.get("/delete/:id",function(req,res) {
-		projectsController.deleteProjectID(req,res);
-	});
+	router.delete("/delete/:id", projectsController.deleteProjectID());
 	//Delete All Project
-	router.get("/delete/",function(req,res) {
-		projectsController.deleteProjectAll(req,res);
-	});
+	router.delete("/delete/", projectsController.deleteProjectAll());
 
 	// Now tell express to use this router, prefixed with /api
 	app.use("/api",router);
