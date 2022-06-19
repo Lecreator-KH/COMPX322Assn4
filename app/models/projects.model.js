@@ -3,10 +3,10 @@ const db = require("./db");
 // TODO: complete the code as per the instructions given in Assignment 4
 
 const Project = function(project) {
-  this.projectName = projectName;
-  this.projectDesc = projectDesc;
-  this.startDate = startDate;
-  this.endDate = endDate;
+  this.projectName = project.projectName;
+  this.projectDesc = project.projectDesc;
+  this.startDate = project.startDate;
+  this.endDate = project.endDate;
 };
 
 //Create Project
