@@ -31,7 +31,7 @@ module.exports = app => {
 		projectsController.retrieveProjectName(req,res);
 	});
 	//Update Project By ID
-	router.get("/projects/:id",function(req,res) {
+	router.get("/update/:id",function(req,res) {
 		projectsController.updateProjectID(req,res);
 	});
 	//Delete Project By ID
