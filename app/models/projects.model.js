@@ -64,28 +64,13 @@ Project.getProjectName = (pName,resultCallback) => {
       resultCallback(err, null);
     }
     else {
-<<<<<<< HEAD
       console.log('Projects :', !res || !res.length ? 'empty response ' + res : res);
       resultCallback(null, res);
-=======
-      for (const project_entry_rdp of result) {
-        const project_entry = {
-          id: project_entry_rdp.id,
-          projectName: project_entry_rdp.projectname,
-          projectDesc: project_entry_rdp.projectdesc,
-          startDate: project_entry_rdp.startdate,
-          endDate: project_entry_rdp.enddate
-        };
-        project_List.push(project_entry);
-      }
-      resultCallback(null,project_List);
->>>>>>> df4b24555b0054698c7645995e6cdc932eec42eb
     }
   });
 }
 
 //Update Project By ID
-<<<<<<< HEAD
 Projects.updateProjectID = (pid, project, resultCallback) => {
   db.query("UPDATE projects SET projectname=?, projectdesc=?, startdate=?, enddate=? WHERE ID=?", [project.projectname, project.projectdesc, project.startdate, project.enddate, pid], function(err, res) {
     if (err) {
@@ -103,27 +88,6 @@ Project.removeProjectID = (pID,resultCallback) => {
     
   var sql = "DELETE * FROM `" + TableName + "` WHERE ID=`" + pID + "`";
   db.query(sql, function(err, res) {
-=======
-Project.updateProjectID = (pID,resultCallback) => {
-    
-  var sql = "ALTER FROM `" + TableName + "` WHERE `" + TableName + "`.`id`=" + pID;
-  console.log(sql);
-  db.query(sql, function (err, result) {
-    if (err) {
-      resultCallback(err);
-    }
-    else {
-      resultCallback(null);
-    }
-  });
-}
-//Delete Projects By ID
-Project.removeProjectID = (pID,resultCallback) => {
-    
-  var sql = "DELETE FROM `" + TableName + "` WHERE `" + TableName + "`.`id`=" + pID;
-  console.log(sql);
-  db.query(sql, function (err, result) {
->>>>>>> df4b24555b0054698c7645995e6cdc932eec42eb
     if (err) {
       console.log('Error: ', err);
       resultCallback(err, null);
@@ -137,11 +101,7 @@ Project.removeProjectID = (pID,resultCallback) => {
 //Delete All Projects
 Project.removeProjectAll = (resultCallback) => {
   var sql = "TRUNCATE TABLE `" + TableName + "`";
-<<<<<<< HEAD
   db.query(sql, function(err, res) {
-=======
-  db.query(sql, function (err, result) {
->>>>>>> df4b24555b0054698c7645995e6cdc932eec42eb
     if (err) {
       console.log('Error: ', err);
       resultCallback(err, null);
