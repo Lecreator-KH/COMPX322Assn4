@@ -15,10 +15,26 @@ module.exports = app => {
 
 	// Provide all routes here
 	//Create Project
+	/**
+	* POST /api/projects
+	* 
+	* 200 status request body (JSON):
+	*     {
+	*        "projectname": "123",
+	*        "projectdesc": "123",
+	*        "startdate": "2001-01-01 0100",
+	*        "enddate": "2001-02-01 1900"
+	*      }
+	* 
+	* 404 status request body (JSON): {}
+	*/
 	router.post("/create/",function(req,res) {
 		projectsController.createProject(req,res);
 	});
 	//Retrive All Project
+	/**
+   	* GET/api/projects
+   	*/
 	router.get("/projects/",function(req,res) {
 		projectsController.retrieveAllProject(req,res);
 	});
@@ -27,7 +43,7 @@ module.exports = app => {
 		projectsController.retrieveProjectID(req,res);
 	});
 	//Retrieve Project by Name
-	router.get("/projects/get/:projectName",function(req,res) {
+	router.get("/projects/project",function(req,res) {
 		projectsController.retrieveProjectName(req,res);
 	});
 	//Update Project By ID
