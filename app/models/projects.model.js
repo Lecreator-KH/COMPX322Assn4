@@ -57,7 +57,7 @@ Project.getProjectID = (pID,resultCallback) => {
 //Retrieve Project by Project Name
 Project.getProjectName = (pName,resultCallback) => {
     
-  var sql = "SELECT * FROM projects WHERE projectname =`" + pName + "`";
+  var sql = "SELECT * FROM projects WHERE projectname ='" + pName + "'";
   db.query(sql, function(err, res) {
     if (err) {
       console.log('Error: ', err);
