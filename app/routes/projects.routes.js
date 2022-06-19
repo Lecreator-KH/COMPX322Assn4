@@ -27,7 +27,7 @@ module.exports = app => {
 		projectsController.retrieveProjectID(req,res);
 	});
 	//Retrieve Project by Name
-	router.get("/projects/:projectName",function(req,res) {
+	router.get("/projects/get/:projectName",function(req,res) {
 		projectsController.retrieveProjectName(req,res);
 	});
 	//Update Project By ID
