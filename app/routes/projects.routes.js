@@ -16,12 +16,7 @@ module.exports = app => {
 	// Provide all routes here
 	//Create Project
 	router.post("/create/",function(req,res) {
-<<<<<<< HEAD
 		projects.createProject(req,res);
-=======
-		projectsController.createProject(req,res);
-		res.sendStatus(204);
->>>>>>> df4b24555b0054698c7645995e6cdc932eec42eb
 	});
 	//Retrive All Project
 	router.get("/projects/",function(req,res) {
@@ -29,7 +24,6 @@ module.exports = app => {
 	});
 	//Retrieve Project by ID
 	router.get("/projects/:id",function(req,res) {
-<<<<<<< HEAD
 		projects.retrieveProjectID(req,res);
 	});
 	//Retrieve Project by Name
@@ -43,23 +37,6 @@ module.exports = app => {
 	//Delete Project By ID
 	router.get("/delete/:id",function(req,res) {
 		projects.deleteProjectID(req,res);
-=======
-		// res.json({"message" : "Request for projects id: " + req.params.id});
-		projectsController.retrieveProjectID(req,res);
-	});
-	//Retrieve Project by Name
-	router.get("/projects/:projectName",function(req,res) {
-		res.json({"message" : "Request for projects name: "+req.params.projectName});
-		projectsController.retrieveProjectName(req,res);
-	});
-	//Update Project By ID
-	router.get("/update/:id",function(req,res) {
-		projectsController.updateProjectID(req,res);
-	});
-	//Delete Project By ID
-	router.get("/delete/:id",function(req,res) {
-		projectsController.deleteProjectID(req,res);
->>>>>>> df4b24555b0054698c7645995e6cdc932eec42eb
 	});
 	//Delete All Project
 	router.get("/delete/",function(req,res) {
