@@ -28,14 +28,14 @@ module.exports = app => {
 	* 
 	* 404 status request body (JSON): {}
 	*/
-	router.post("/create/",function(req,res) {
+	router.post("/projects/",function(req,res) {
 		projectsController.createProject(req,res);
 	});
 	//Retrive All Project
 	/**
    	* GET/api/projects
    	*/
-	router.get("/projects/",function(req,res) {
+	router.get("/projects",function(req,res) {
 		projectsController.retrieveAllProject(req,res);
 	});
 	//Retrieve Project by ID
@@ -43,19 +43,19 @@ module.exports = app => {
 		projectsController.retrieveProjectID(req,res);
 	});
 	//Retrieve Project by Name
-	router.get("/projects/get/:projectName",function(req,res) {
+	router.get("/projects/project/:projectName",function(req,res) {
 		projectsController.retrieveProjectName(req,res);
 	});
 	//Update Project By ID
-	router.get("/update/:id",function(req,res) {
+	router.put("/projects/:id",function(req,res) {
 		projectsController.updateProjectID(req,res);
 	});
 	//Delete Project By ID
-	router.get("/delete/:id",function(req,res) {
+	router.delete("/projects/:id",function(req,res) {
 		projectsController.deleteProjectID(req,res);
 	});
 	//Delete All Project
-	router.get("/delete/",function(req,res) {
+	router.delete("/projects",function(req,res) {
 		projectsController.deleteProjectAll(req,res);
 	});
 
