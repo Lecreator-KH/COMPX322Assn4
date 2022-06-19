@@ -38,13 +38,13 @@ module.exports = app => {
 	router.get("/projects/",function(req,res) {
 		projectsController.retrieveAllProject(req,res);
 	});
-	//Retrieve Project by ID
-	router.get("/projects/:id",function(req,res) {
-		projectsController.retrieveProjectID(req,res);
-	});
 	//Retrieve Project by Name
 	router.get("/projects/project",function(req,res) {
 		projectsController.retrieveProjectName(req,res);
+	});
+	//Retrieve Project by ID
+	router.get("/projects/:id",function(req,res) {
+		projectsController.retrieveProjectID(req,res);
 	});
 	//Update Project By ID
 	router.get("/update/:id",function(req,res) {
