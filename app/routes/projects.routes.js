@@ -28,22 +28,36 @@ module.exports = app => {
 	* 
 	* 404 status request body (JSON): {}
 	*/
-	router.post("/create/", projectsController.createProject());
+	router.post("/create/",function(req,res) {
+		projectsController.createProject(req,res);
+	});
 	//Retrive All Project
 	/**
    	* GET/api/projects
    	*/
-	router.get("/projects/", projectsController.retrieveAllProject());
-	//Retrieve Project by Name
-	router.get("/projects/project", projectsController.retrieveProjectName());
+	router.get("/projects/",function(req,res) {
+		projectsController.retrieveAllProject(req,res);
+	});
 	//Retrieve Project by ID
-	router.get("/projects/:id", projectsController.retrieveProjectID());
+	router.get("/projects/:id",function(req,res) {
+		projectsController.retrieveProjectID(req,res);
+	});
+	//Retrieve Project by Name
+	router.get("/projects/get/:projectName",function(req,res) {
+		projectsController.retrieveProjectName(req,res);
+	});
 	//Update Project By ID
-	router.put("/update/:id", projectsController.updateProjectID());
+	router.get("/update/:id",function(req,res) {
+		projectsController.updateProjectID(req,res);
+	});
 	//Delete Project By ID
-	router.delete("/delete/:id", projectsController.deleteProjectID());
+	router.get("/delete/:id",function(req,res) {
+		projectsController.deleteProjectID(req,res);
+	});
 	//Delete All Project
-	router.delete("/delete/", projectsController.deleteProjectAll());
+	router.get("/delete/",function(req,res) {
+		projectsController.deleteProjectAll(req,res);
+	});
 
 	// Now tell express to use this router, prefixed with /api
 	app.use("/api",router);
