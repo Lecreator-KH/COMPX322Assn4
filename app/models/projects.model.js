@@ -11,8 +11,8 @@ const Project = function(project) {
 
 //Create Project
 Project.insertProject = (project, resultCallback) => {
-  var sql = "INSERT INTO projects SET ?", project;
-  db.query(sql, function(err, res) {
+  // var sql = "INSERT INTO projects SET ?", project;
+  db.query('INSERT INTO projects SET ?', project, function(err, res) {
     if (err) {
       console.log('Error: ', err);
       resultCallback(err, null);
