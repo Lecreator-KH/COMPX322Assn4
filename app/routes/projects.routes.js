@@ -28,7 +28,7 @@ module.exports = app => {
 	* 
 	* 404 status request body (JSON): {}
 	*/
-	router.post("/projects/",function(req,res) {
+	router.post("/projects",function(req,res) {
 		projectsController.createProject(req,res);
 	});
 	//Retrive All Project
