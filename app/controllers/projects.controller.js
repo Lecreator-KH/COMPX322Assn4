@@ -29,7 +29,7 @@ exports.retrieveAllProject = (req,res) => {
 }
 
 exports.retrieveProjectID = (req,res) => {
-    Project.getProjectID( pID, (err,data) => {
+    Project.getProjectID( req.params.id, (err,data) => {
 		if (err)
 			res.status(500).send(err);
 		else
@@ -45,7 +45,7 @@ exports.retrieveProjectID = (req,res) => {
 }
 
 exports.retrieveProjectName = (req,res) => {
-    Project.getProjectName( pName, (err,data) => {
+    Project.getProjectName( req.params.projectName, (err,data) => {
 		if (err) 
 			res.status(500).send(err);
 		else
@@ -68,7 +68,7 @@ exports.updateProjectID = (req, res) => {
 		  	message: "Content can not be empty!"
 		});
 	else 
-	  	Projects.updateProjectID(req.params.id, new Project(req.body), (err, affectedRows) => {
+	  	Project.updateProjectID(req.params.id, new Project(req.body), (err, affectedRows) => {
 			// something went wrong with the server or database
 			if (err) 
 				res.status(500).send(err);
@@ -89,7 +89,7 @@ exports.updateProjectID = (req, res) => {
 }
 
 exports.deleteProjectID = (req,res) => {
-    Project.removeProjectID( pID, (err) => {
+    Project.removeProjectID( req.params.id, (err) => {
 		if (err)
 			res.status(500).send(err);
 		else
