@@ -3,8 +3,7 @@ const db = require("./db");
 // TODO: complete the code as per the instructions given in Assignment 4
 const TableName = "projects";
 
-const Project = function(id,projectName,projectDesc,startDate,endDate) {
-  this.id = id;
+const Project = function(project) {
   this.projectName = projectName;
   this.projectDesc = projectDesc;
   this.startDate = startDate;
@@ -12,69 +11,46 @@ const Project = function(id,projectName,projectDesc,startDate,endDate) {
 };
 
 //Create Project
-Project.insertProject = (project,resultCallback) => {
-
-  var sql = "INSERT INTO `" + TableName + "` (`id`, `projectname`, `projectdesc`, `startdate`, `enddate`)";
-  sql += " VALUES ('"+project.id+"',"+project.projectName+"',"+project.projectDesc+"',"+project.startDate+"',"+project.endDate+")";
-
-  connection.query(sql, function (err, result) {
+Project.insertProject = (project, resultCallback) => {
+  var sql = "INSERT INTO projects SET " + project;
+  db.query(sql, function(err, res) {
     if (err) {
-      console.log(err);
-      resultCallback(err,null);
+      console.log('Error: ', err);
+      resultCallback(err, null);
     }
     else {
-      // get the id, and return it to the controller via 2nd argument to resultCallback()
-      console.log("Added: " + project.id + " " + project.projectName + " " + project.projectDesc + " " + project.startDate + " " + project.endDate + ")");
+      console.log('Created project: ', {id: res.insertId, ...project});
+      resultCallback(null, {id: res.insertId, ...project});
     }
   });
 }
 
 //Retrieve Project
 Project.getProjectAll = (resultCallback) => {
-    
-  var sql = "SELECT * FROM `" + TableName + "`";
-  connection.query(sql, function (err, result) {
-    let project_List = []
+  var sql = "SELECT * FROM projects";
+  db.query(sql, function(err, res) {
     if (err) {
-      resultCallback(err,null);
+      console.log('Error: ', err);
+      resultCallback(err, null);
     }
     else {
-      for (const project_entry_rdp of result) {
-        const project_entry = {
-          id: project_entry_rdp.id,
-          projectName: project_entry_rdp.projectName,
-          projectDesc: project_entry_rdp.projectDesc,
-          startDate: project_entry_rdp.startDate,
-          endDate: project_entry_rdp.endDate
-        };
-        project_List.push(movie_entry);
-      }
-      resultCallback(null,project_List);
-    }
+      console.log('Project :', !res || !res.length ? 'Empty response ' + res : res);
+      resultCallback(null, res);
+    }        
   });
 }
 
 //Retrieve Project By ID
 Project.getProjectID = (pID,resultCallback) => {
-    
   var sql = "SELECT * FROM `" + TableName + "` WHERE ID=`" + pID + "`";
-  connection.query(sql, function (err, result) {
-    let project_List = []
+  db.query(sql, function(err, res) {
     if (err) {
-      resultCallback(err,null);
+      console.log('Error: ', err);
+      resultCallback(err, null);
     }
     else {
-      for (const project_entry_rdp of result) {
-        const project_entry = {
-          id: project_entry_rdp.id,
-          projectName: project_entry_rdp.projectName,
-          projectDesc: project_entry_rdp.projectDesc,
-          startDate: project_entry_rdp.startDate,
-          endDate: project_entry_rdp.endDate
-        };
-        project_List.push(movie_entry);
-      }
-      resultCallback(null,project_List);
+      console.log('Project :', !res || !res.length ? 'empty response ' + res : res);
+      resultCallback(null, res);
     }
   });
 }
@@ -82,55 +58,57 @@ Project.getProjectID = (pID,resultCallback) => {
 //Retrieve Project by Project Name
 Project.getProjectName = (pName,resultCallback) => {
     
-  var sql = "SELECT * FROM `" + TableName + "` WHERE ID=`" + pName + "`";
-  connection.query(sql, function (err, result) {
-    let project_List = []
+  var sql = "SELECT * FROM `" + TableName + "` WHERE projectname=`" + pName + "`";
+  db.query(sql, function(err, res) {
     if (err) {
-      resultCallback(err,null);
+      console.log('Error: ', err);
+      resultCallback(err, null);
     }
     else {
-      for (const project_entry_rdp of result) {
-        const project_entry = {
-          id: project_entry_rdp.id,
-          projectName: project_entry_rdp.projectName,
-          projectDesc: project_entry_rdp.projectDesc,
-          startDate: project_entry_rdp.startDate,
-          endDate: project_entry_rdp.endDate
-        };
-        project_List.push(movie_entry);
-      }
-      resultCallback(null,project_List);
+      console.log('Projects :', !res || !res.length ? 'empty response ' + res : res);
+      resultCallback(null, res);
     }
   });
 }
 
 //Update Project By ID
-
+Projects.updateProjectID = (pid, project, resultCallback) => {
+  db.query("UPDATE projects SET projectname=?, projectdesc=?, startdate=?, enddate=? WHERE ID=?", [project.projectname, project.projectdesc, project.startdate, project.enddate, pid], function(err, res) {
+    if (err) {
+      console.log('Error: ', err);
+      resultCallback(err, null);   
+    }
+    else {
+      resultCallback(null, res.affectedRows);
+    }          
+  });
+}
 
 //Delete Projects By ID
 Project.removeProjectID = (pID,resultCallback) => {
     
-  var sql = "DELETE * FROM `" + TableName + "` WHERE ID=`" + pName + "`";
-  connection.query(sql, function (err, result) {
+  var sql = "DELETE * FROM `" + TableName + "` WHERE ID=`" + pID + "`";
+  db.query(sql, function(err, res) {
     if (err) {
-      resultCallback(err);
+      console.log('Error: ', err);
+      resultCallback(err, null);
     }
     else {
-      resultCallback(null);
+      resultCallback(null, res.affectedRows);
     }
   });
 }
 
 //Delete All Projects
 Project.removeProjectAll = (resultCallback) => {
-    
   var sql = "TRUNCATE TABLE `" + TableName + "`";
-  connection.query(sql, function (err, result) {
+  db.query(sql, function(err, res) {
     if (err) {
-      resultCallback(err);
+      console.log('Error: ', err);
+      resultCallback(err, null);
     }
     else {
-      resultCallback(null);
+      resultCallback(null, res);
     }
   });
 }
