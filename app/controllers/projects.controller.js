@@ -89,7 +89,7 @@ exports.updateProjectID = (req, res) => {
 }
 
 exports.deleteProjectID = (req,res) => {
-    Project.removeProjectID( req.params.id, (err) => {
+    Project.removeProjectID( req.params.id, (err, affectedRows) => {
 		if (err)
 			res.status(500).send(err);
 		else
